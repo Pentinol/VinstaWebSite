@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VinstaGO — Auto-Rigging & Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --vinsta-green: #a3e635; /* Салатовый */
+            --vinsta-dark-green: #65a30d;
+            --vinsta-bg: #1a1a1a; /* Темно-серый вместо синего */
+            --vinsta-card: #262626;
+        }
+        body {
+            background-color: var(--vinsta-bg);
+            color: #f3f4f6;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        .hero-section {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.7)), url('preview.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .btn-primary {
+            background-color: var(--vinsta-green);
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: var(--vinsta-dark-green);
+            transform: translateY(-2px);
+        }
+        .btn-youtube {
+            background-color: #ef4444; /* Красный */
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+        .btn-youtube:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+        }
+        .nav-link:hover {
+            color: var(--vinsta-green);
+        }
+        .faq-item {
+            background-color: var(--vinsta-card);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.25rem;
+            color: #9ca3af;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-bottom: 1.25rem;
+        }
+        .faq-item.active i {
+            transform: rotate(180deg);
+        }
+        .lang-select {
+            background: #262626;
+            border: 1px solid #404040;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            outline: none;
+        }
+        .lang-select:hover {
+            border-color: var(--vinsta-green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <nav class="sticky top-0 z-50 bg-[#1a1a1a]/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <img src="icon.png" alt="VinstaGO Logo" class="h-8 w-8 object-contain" onerror="this.src='https://via.placeholder.com/1000?text=V'">
+                    <span class="text-xl font-bold tracking-tighter text-white">VinstaGO</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <div class="flex items-baseline space-x-6">
+                        <a href="#" class="nav-link px-3 py-2 text-sm font-medium" data-t="nav_features">Features</a>
+                        <a href="#news" class="nav-link px-3 py-2 text-sm font-medium" data-t="nav_news">News</a>
+                        <a href="#faq" class="nav-link px-3 py-2 text-sm font-medium" data-t="nav_faq">FAQ</a>
+                        <a href="https://google.com" target="_blank" class="bg-gray-800 px-4 py-2 rounded-md text-sm font-medium border border-gray-700 hover:border-lime-400 transition-colors">GitHub</a>
+                    </div>
+                    <!-- Переключатель языка -->
+                    <div class="flex items-center gap-2 border-l border-gray-700 pl-6">
+                        <i class="fas fa-globe text-gray-400 text-xs"></i>
+                        <select onchange="changeLanguage(this.value)" id="languageSwitcher" class="lang-select">
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Блок -->
+    <section class="hero-section">
+        <div class="text-center px-4">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg">
+                <span data-t="hero_title">Download VinstaGO</span> 
+                <span class="text-lime-400">1.05</span>
+            </h1>
+            
+            <div class="flex flex-col items-center gap-6">
+                <!-- Основная кнопка -->
+                <div class="flex flex-col md:flex-row items-stretch justify-center gap-0 overflow-hidden rounded-lg shadow-2xl">
+                    <a href="https://google.com" target="_blank" class="btn-primary flex items-center gap-3 px-8 py-4 font-bold text-lg">
+                        <i class="fab fa-windows"></i>
+                        <i class="fab fa-github"></i>
+                        <span data-t="btn_download">Download with GitHub</span>
+                    </a>
+                    <div class="bg-white/90 text-black flex items-center px-6 py-4 font-mono font-bold text-lg border-l border-gray-300">
+                        1.05
+                    </div>
+                </div>
+                
+                <!-- Кнопка Видеоурока (теперь прямоугольная и красная) -->
+                <a href="https://google.com" target="_blank" class="btn-youtube flex items-center justify-center gap-3 px-6 py-3 rounded-lg font-bold shadow-lg">
+                    <i class="fab fa-youtube text-xl"></i>
+                    <span data-t="btn_tutorial">Video tutorial</span>
+                </a>
+                
+                <p class="text-gray-400 text-sm mt-2">x86_64 - Win 10/11 - 25 April 2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Описание программы -->
+    <section class="max-w-4xl mx-auto py-20 px-6 text-center">
+        <h2 class="text-3xl font-bold mb-8 text-white" data-t="desc_title">Professional Auto-Rigging</h2>
+        <p class="text-xl text-gray-400 leading-relaxed" data-t="desc_text">
+            VinstaGO is a free program for auto-rigging and applying ready-made animations. 
+            We support GLB / GLTF formats, provide the ability to record multiple animations at once during export. 
+            There are many other functions, as well as 16 current professional animations.
+        </p>
+    </section>
+
+    <!-- Раздел Новости -->
+    <section id="news" class="bg-[#141414] py-20">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="h-1 w-12 bg-lime-400"></div>
+                <h2 class="text-3xl font-bold text-white uppercase tracking-wider" data-t="news_header">News</h2>
+            </div>
+            
+            <div class="bg-[#262626] p-8 rounded-xl border-l-4 border-lime-400">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-white" data-t="news_title">Version 1.05 — Multi-animation & Localization</h3>
+                    <span class="bg-lime-500/20 text-lime-400 px-3 py-1 rounded text-xs font-bold">NEW</span>
+                </div>
+                <p class="text-gray-400" data-t="news_desc">
+                    In version 1.05, added the ability to record several animations to a file at once during export. 
+                    Also added full English (EN) language support.
+                </p>
+                <div class="mt-4 text-sm text-gray-500">25 April 2026</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел FAQ -->
+    <section id="faq" class="py-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-white mb-10 text-center" data-t="faq_header">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-t="faq_q1">White screen on startup</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer" data-t="faq_a1">
+                        Try turning on a VPN and restarting the program a few times.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-t="faq_q2">Infinite login loading</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer" data-t="faq_a2">
+                        You need to enable the internet and restart the program.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-t="faq_q3">Infinite loading when importing a model</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer" data-t="faq_a3">
+                        Your model is not suitable for rigging and conflicts with the program's algorithm.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-t="faq_q4">Animations are applied incorrectly</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer" data-t="faq_a4">
+                        Correctly place the key markers as indicated in the Auto-Rigger window and adjust the slider values.
+                    </div>
+                </div>
+
+                <div class="faq-item border border-lime-400/30">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-t="faq_q5">I don't understand how to use the program</span>
+                        <i class="fas fa-chevron-down transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <span data-t="faq_a5">Watch the tutorial video by clicking </span>
+                        <a href="https://google.com" target="_blank" class="text-lime-400 underline italic" data-t="faq_link">at this link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="bg-black py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex items-center gap-3">
+                <img src="icon.png" alt="Logo" class="h-6 w-6 opacity-50" onerror="this.src='https://via.placeholder.com/1000'">
+                <span class="text-gray-500 font-bold">VinstaGO</span>
+            </div>
+            
+            <div class="flex gap-8 text-sm text-gray-500">
+                <a href="https://google.com" class="hover:text-lime-400 transition-colors">Telegram</a>
+                <span><span data-t="footer_ver">Version</span>: 1.05</span>
+                <span><span data-t="footer_dev">Developer</span>: VinstaDev</span>
+                <span data-t="footer_date">Release date: 25.04.2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                nav_features: "Features",
+                nav_news: "News",
+                nav_faq: "FAQ",
+                hero_title: "Download VinstaGO",
+                btn_download: "Download with GitHub",
+                btn_tutorial: "Video tutorial",
+                desc_title: "Professional Auto-Rigging",
+                desc_text: "VinstaGO is a free program for auto-rigging and applying ready-made animations. We support GLB / GLTF formats, provide the ability to record multiple animations at once during export. There are many other functions, as well as 16 current professional animations.",
+                news_header: "News",
+                news_title: "Version 1.05 — Multi-animation & Localization",
+                news_desc: "In version 1.05, added the ability to record several animations to a file at once during export. Also added full English (EN) language support.",
+                faq_header: "Frequently Asked Questions",
+                faq_q1: "White screen on startup",
+                faq_a1: "Try turning on a VPN and restarting the program a few times.",
+                faq_q2: "Infinite login loading",
+                faq_a2: "You need to enable the internet and restart the program.",
+                faq_q3: "Infinite loading when importing a model",
+                faq_a3: "Your model is not suitable for rigging and conflicts with the program's algorithm.",
+                faq_q4: "Animations are applied incorrectly",
+                faq_a4: "Correctly place the key markers as indicated in the Auto-Rigger window and adjust the slider values.",
+                faq_q5: "I don't understand how to use the program",
+                faq_a5: "Watch the tutorial video by clicking ",
+                faq_link: "at this link",
+                footer_ver: "Version",
+                footer_dev: "Developer",
+                footer_date: "Release date: 25.04.2026"
+            },
+            ru: {
+                nav_features: "Особенности",
+                nav_news: "Новости",
+                nav_faq: "FAQ",
+                hero_title: "Скачать VinstaGO",
+                btn_download: "Скачать через GitHub",
+                btn_tutorial: "Видео инструкция",
+                desc_title: "Профессиональный авто-риггинг",
+                desc_text: "VinstaGO — бесплатная программа для авто риггинга и применения готовых анимаций, поддерживает форматы GLB / GLTF, возможность записать при экспорте в файл сразу несколько анимаций , есть множ-во других функций, а также 16 действующих анимаций.",
+                news_header: "Новости",
+                news_title: "В 1.05 версии добавлена возможность записи",
+                news_desc: "В 1.05 версии добавлена возможность записывать в файл при экспорте сразу несколько анимаций, добавлен EN язык.",
+                faq_header: "Часто задаваемые вопросы",
+                faq_q1: "При запуске программы белый экран",
+                faq_a1: "Попробуйте включить VPN и пару раз перезапустить программу.",
+                faq_q2: "Вечная загрузка входа в программу",
+                faq_a2: "Необходимо включить интернет и перезапустить программу.",
+                faq_q3: "Бесконечная загрузка при импорте модели",
+                faq_a3: "Ваша модель не подходит для риггинга и конфликтует с алгоритмом программы.",
+                faq_q4: "У меня криво применяются анимации",
+                faq_a4: "Корректно расставьте ключевые маркеры как указано в окне Auto-Rigger и настраивайте значения слайдеров.",
+                faq_q5: "Не понял как пользоваться программой",
+                faq_a5: "Посмотрите обучающий видеоролик, кликнув по ",
+                faq_link: "*этой ссылке*",
+                footer_ver: "Версия",
+                footer_dev: "Разработчик",
+                footer_date: "Дата релиза: 25.04.2026"
+            }
+        };
+
+        function changeLanguage(lang) {
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
+        }
+
+        // Инициализация по умолчанию
+        window.onload = () => changeLanguage('en');
+    </script>
+</body>
+</html>
